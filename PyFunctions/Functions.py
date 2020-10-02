@@ -7,8 +7,8 @@ import pandas as pd
 from keras.utils import to_categorical
 from sklearn.utils import shuffle as sk_shuffle
 from sklearn.model_selection import train_test_split
-from keras.applications.mobilenet_v2 import preprocess_input
-
+from keras.applications.mobilenet_v2 import preprocess_input as mobile_preprocess
+from keras.applications.vgg16 import preprocess_input as vgg16_preprocess
 
 def get_image_value(path, dim, bw, model_type): 
     '''This function will read an image and convert to a specified version and resize depending on which algorithm is being used.  If edge is specified as true, it will pass the img array to get_edged which returns a filtered version of the img'''
@@ -18,12 +18,15 @@ def get_image_value(path, dim, bw, model_type):
         img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         img = img.reshape(img.shape[0], img.shape[1],1)
     if model_type == 'mobilenet': 
-        img = preprocess_input(img)
+        img = mobile_preprocess(img)
+        return img
+    elif model_type == 'vgg16': 
+        img = vgg16_preprocess(img) 
         return img
     return img/255
 
 
-def get_emotion_classes(class_type, max_values = 4500): 
+def get_emotion_classes(class_type, max_values = 6000): 
     angry_paths = [f'../EmotionDataset/{class_type}/angry/{i}' for i in os.listdir(f'../EmotionDataset/{class_type}/angry')][:max_values]
     angry_labels = [0 for i in range(len(angry_paths))]
     
