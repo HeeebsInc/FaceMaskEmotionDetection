@@ -17,10 +17,10 @@ def get_image_value(path, dim, bw, model_type):
     if bw == True: 
         img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         img = img.reshape(img.shape[0], img.shape[1],1)
-    if model_type == 'mobilenet': 
+    if model_type.upper() == 'MOBILENET': 
         img = mobile_preprocess(img)
         return img
-    elif model_type == 'vgg16': 
+    elif model_type.upper() == 'VGG16': 
         img = vgg16_preprocess(img) 
         return img
     return img/255
@@ -37,8 +37,8 @@ def get_emotion_classes(class_type, max_values = 6000):
     
     neutral_labels = [2 for i in range(len(neutral_paths))]
     
-    sad_paths = [f'../EmotionDataset/{class_type}/sad/{i}' for i in os.listdir(f'../EmotionDataset/{class_type}/sad')][:max_values] 
-    sad_labels = [3 for i in range(len(sad_paths))]
+#     sad_paths = [f'../EmotionDataset/{class_type}/sad/{i}' for i in os.listdir(f'../EmotionDataset/{class_type}/sad')][:max_values] 
+#     sad_labels = [3 for i in range(len(sad_paths))]
     
 #     disgust_paths = [f'../EmotionDataset/{class_type}/disgust/{i}' for i in os.listdir(f'../EmotionDataset/{class_type}/disgust')]
 #     disgust_labels = [4 for i in range(len(disgust_paths))]
@@ -49,19 +49,18 @@ def get_emotion_classes(class_type, max_values = 6000):
 #     surprise_paths = [f'../EmotionDataset/{class_type}/surprise/{i}' for i in os.listdir(f'../EmotionDataset/{class_type}/surprise')] 
 #     surprise_labels = [6 for i in range(len(surprise_paths))]
     
-    labels = np.array(angry_labels + happy_labels + \
-                        neutral_labels + sad_labels)
+    labels = np.array(angry_labels + happy_labels + neutral_labels)
     
     print(f'{class_type.upper()} Value Count')
     print(pd.Series(labels).value_counts())
     print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
     labels = to_categorical(labels)
-    paths = np.array(angry_paths + happy_paths + neutral_paths + \
-                          sad_paths)
+    paths = np.array(angry_paths + happy_paths + neutral_paths)
     paths, labels = sk_shuffle(paths, labels)
     return paths, labels
+
 #0: angry  1: disgust  2: fear  3: happy  4: neutral  5: sad  6: surprise
-def get_emotion_splits(dim, model_type = 'Mobilenet', bw = False): 
+def get_emotion_splits(dim, model_type = 'mobilenet', bw = False): 
     
     #Train
     
@@ -70,9 +69,5 @@ def get_emotion_splits(dim, model_type = 'Mobilenet', bw = False):
     
     train_images = np.array([get_image_value(i, dim, bw, model_type) for i in train_paths])
     test_images = np.array([get_image_value(i, dim, bw, model_type) for i in test_paths])
-    if model_type == 'Mobilenet' and bw == True: 
-        train_images = np.stack((train_images,)*3, axis =-1)
-        test_images = np.stack((test_images,)*3, axis = -1)
-    
     
     return train_images, test_images, train_labels, test_labels 
