@@ -16,7 +16,12 @@ def get_image_value(path, dim, bw, model_type):
     img = image.img_to_array(img)
     if bw == True: 
         img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        img = img.reshape(img.shape[0], img.shape[1],1)
+        if model_type.upper() != 'Normal': 
+            img = np.stack((img,)*3, axis =-1)
+        else: 
+            img = img.reshape(img.shape[0], img.shape[1],1)
+
+
     if model_type.upper() == 'MOBILENET': 
         img = mobile_preprocess(img)
         return img
@@ -26,7 +31,7 @@ def get_image_value(path, dim, bw, model_type):
     return img/255
 
 
-def get_emotion_classes(class_type, max_values = 6000): 
+def get_emotion_classes(class_type, max_values): 
     angry_paths = [f'../EmotionDataset/{class_type}/angry/{i}' for i in os.listdir(f'../EmotionDataset/{class_type}/angry')][:max_values]
     angry_labels = [0 for i in range(len(angry_paths))]
     
@@ -60,14 +65,18 @@ def get_emotion_classes(class_type, max_values = 6000):
     return paths, labels
 
 #0: angry  1: disgust  2: fear  3: happy  4: neutral  5: sad  6: surprise
-def get_emotion_splits(dim, model_type = 'mobilenet', bw = False): 
+def get_emotion_splits(dim, model_type = 'mobilenet', bw = False, max_values = 6000): 
     
     #Train
     
-    train_paths, train_labels = get_emotion_classes('train')
-    test_paths, test_labels = get_emotion_classes('test')
+    train_paths, train_labels = get_emotion_classes('train', max_values)
+    test_paths, test_labels = get_emotion_classes('test', max_values)
     
     train_images = np.array([get_image_value(i, dim, bw, model_type) for i in train_paths])
     test_images = np.array([get_image_value(i, dim, bw, model_type) for i in test_paths])
+    
+#     if model_type.upper() != 'NORMAL' and bw == True: 
+#         train_images = np.stack((train_images,)*3, axis =-1)
+#         test_images = np.stack((test_images,)*3, axis = -1)
     
     return train_images, test_images, train_labels, test_labels 
