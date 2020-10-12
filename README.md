@@ -84,3 +84,7 @@
 ![Demo](Images/Demo.gif)
 
 ## Future Directions
+
+- Use more models (InceptionNet, VGG16, etc.)
+- Use a camera that detects heat.  This can be used to determine if someone is experiencing fever.
+- More data.  So far, this model has trouble detecting a mask when a person is wearing glasses.  Using more images with people that wear glasses will get better results
