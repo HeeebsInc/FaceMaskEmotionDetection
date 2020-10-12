@@ -42,8 +42,12 @@
 
 
 <p align="center" width="100%">
-    <img width="50%" src="Images/Mobilenet_Loss_Acc.png"> 
-    <img width="50%" src="Images/Mobilenet_ROC_F1.png"> 
+    <img width="45%" src="Images/Mobilenet_Loss_Acc.png"> 
+    <img width="45%" src="Images/Mobilenet_ROC_F1.png"> 
+</p>
+
+<p align="center" width="100%">
+    <img width="75%" src="Images/Mobilenet_CM.png"> 
 </p>
 
 **2. Emotion Detection: Convolutional Neural Network** 

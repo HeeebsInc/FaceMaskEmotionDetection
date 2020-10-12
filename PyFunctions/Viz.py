@@ -112,12 +112,11 @@ def plot_roc_auc(model, x_test, y_test, theme, model_type, path = None):
     
       
 def plot_model_cm(test_cm, train_cm, classes,
-                          theme, cmap=plt.cm.Blues, path = None, normalize=False):
+                          theme, model_type, cmap=plt.cm.Blues, path = None, normalize=False):
     """
     This function prints and plots the confusion matrix.
     Normalization can be applied by setting `normalize=True`.
     """
-    import itertools
     plt.style.use(theme)
 
     if normalize:
@@ -131,8 +130,10 @@ def plot_model_cm(test_cm, train_cm, classes,
     ax[0].imshow(test_cm, interpolation='nearest', cmap=cmap)
     ax[0].set_title('CM for Test')
     tick_marks = np.arange(len(classes))
-    ax[0].set_xticks(tick_marks, classes)
-    ax[0].set_yticks(tick_marks, classes)
+    ax[0].set_xticks(tick_marks)
+    ax[0].set_xticklabels(classes)
+    ax[0].set_yticks(tick_marks)
+    ax[0].set_yticklabels(classes)
 
     fmt = '.2f' if normalize else 'd'
     thresh = test_cm.max() / 2.
@@ -143,16 +144,24 @@ def plot_model_cm(test_cm, train_cm, classes,
 
     ax[0].set_ylabel('True label')
     ax[0].set_xlabel('Predicted label')
-    ax[0].set_ylim(2.5, -.5)
+    if model_type.upper() == 'MASK': 
+        ax[0].set_ylim(1.5, -.5)
+    if model_type.upper() == 'EMOTION': 
+        ax[0].set_ylim(2.5, -.5)
 
     
     
     #Train Set
     ax[1].imshow(train_cm, interpolation='nearest', cmap=cmap)
-    ax[1].set_title('CM for Train')
+    if model_type.upper() == 'MASK':
+        ax[1].set_title('CM for Validation')
+    if model_type.upper() == 'EMOTION':
+        ax[1].set_title('CM for Train')
     tick_marks = np.arange(len(classes))
-    ax[1].set_xticks(tick_marks, classes)
-    ax[1].set_yticks(tick_marks, classes)
+    ax[1].set_xticks(tick_marks)
+    ax[1].set_xticklabels(classes)
+    ax[1].set_yticks(tick_marks)
+    ax[1].set_yticklabels(classes)
 
     fmt = '.2f' if normalize else 'd'
     thresh = train_cm.max() / 2.
@@ -163,10 +172,13 @@ def plot_model_cm(test_cm, train_cm, classes,
 
     ax[1].set_ylabel('True label')
     ax[1].set_xlabel('Predicted label')
-    ax[1].set_ylim(2.5, -.5)
+    if model_type.upper() == 'MASK': 
+        ax[1].set_ylim(1.5, -.5)
+    if model_type.upper() == 'EMOTION': 
+        ax[1].set_ylim(2.5, -.5)
     
     plt.tight_layout()
     
     if path: 
         plt.savefig(path)
-    plt.show()   
+    plt.show() 
