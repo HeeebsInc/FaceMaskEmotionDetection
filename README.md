@@ -68,16 +68,6 @@
     <img width="75%" src="Images/Normal_CM.png"> 
 </p>
 
-## LIME Feature Extraction
-- [Notebook](LimeFE.ipynb)
-- In this section of the notebook, I use LIME- a python package that can be used for feature extraction of black box models
-- Below, the areas that are green are those that the algorithm deems "important" for making a prediction
-- This technique is useful because it allowed me to understand what the neural network is basing its predictions off of
-
-#### Mask Detection: Mobilenet
-
-#### Emotion Detection: Convolutional Neural Network
-
 ## Deployment
 - [Notebook](FaceDetector.ipynb)
 - In this section, the models were applied to live video
