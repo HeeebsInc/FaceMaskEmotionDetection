@@ -39,7 +39,7 @@
 - Weights for imagenet were applied as well as sigmoid activation for the output layer, and binary crossentropy for the loss function
 - Mobilenet was trained on the mask dataset
 - Augmentation was applied to the training to ensure the model is able to generalize predictions to unknown data 
-
+- Predicted Classes: No Mask(0) & Mask(1)
 
 <p align="center" width="100%">
     <img width="45%" src="Images/Mobilenet_Loss_Acc.png"> 
@@ -54,7 +54,16 @@
 - [Notebook](NormalEmotions.ipynb)
 - Images were resized to (48,48)
 - Softmax activation and categorical crossentropy were applied
+- Predicted Classes: Angry(0), Happy(1), Neutral(2)
 
+<p align="center" width="100%">
+    <img width="45%" src="Images/Normal_Loss_Acc.png"> 
+    <img width="45%" src="Images/Normal_ROC_F1.png"> 
+</p>
+
+<p align="center" width="100%">
+    <img width="75%" src="Images/Normal_CM.png"> 
+</p>
 
 ## LIME Feature Extraction
 - [Notebook](LimeFE.ipynb)
