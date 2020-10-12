@@ -29,6 +29,9 @@
 2. Emotion: ~30K Images Dataset ([Kaggle](https://www.kaggle.com/msambare/fer2013))
 
 ## Modeling
+- For each model, early stopping was applied to prevent the model from overfitting
+- The data for the models can be retrieved using the functions within the [Functions.py](PyFunctions/Functions.py) file
+- Visualizations functions for the confusion matrix, loss/accuracy, and ROC curve can be found within the [Viz.py](PyFunctions/Viz.py) file 
 
 **1. Face Mask Detection: Mobilenet**
 - [Notebook](MobilenetMasks.ipynb)
@@ -50,8 +53,25 @@
 
 ## LIME Feature Extraction
 - [Notebook](LimeFE.ipynb)
+- In this section of the notebook, I use LIME- a python package that can be used for feature extraction of black box models
+- Below, the areas that are green are those that the algorithm deems "important" for making a prediction
+- This technique is useful because it allowed me to understand what the neural network is basing its predictions off of
+
+#### Mask Detection: Mobilenet
+
+#### Emotion Detection: Convolutional Neural Network
 
 ## Deployment
 - [Notebook](FaceDetector.ipynb)
+- In this section, the models were applied to live video
+- The steps for applying this to live video were as follows:\
+    1. Use [Haar feature based cascade classifier](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_objdetect/py_face_detection/py_face_detection.html) to locate the coordinates of a face within a frame
+    2. Extract the ROI of the face using the coordinates given by the classifier
+    3. Make two copies of the ROI, one for the mask model and another for the emotion model
+   44. Resize each copy to the correspoding dimensions used within the models 
+    5. Start by making a mask prediction
+        - If the model detects there is a mask, it will stop predicting and show a green box
+        - If the model does not detect the mask, the algorithm will move onto the emotion model
+    - Below you can see a .gif of how it works on my local machine
 
 ## Future Directions

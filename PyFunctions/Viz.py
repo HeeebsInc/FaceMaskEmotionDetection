@@ -44,7 +44,7 @@ def plot_roc_auc(model, x_test, y_test, theme, path = None):
     '''This function will create ROC curve given the model, x_test, y_test, and theme for the plot. '''
     plt.style.use(theme)
     plt.figure(figsize = (8,5))
-    y_test = label_binarize(y_test, classes = [0,1,2])
+    y_test = label_binarize(y_test, classes = [0,1])
     n_classes = y_test.shape[1]
     
     #AUC CURVE
