@@ -80,3 +80,44 @@ def get_emotion_splits(dim, model_type = 'mobilenet', bw = False, max_values = 6
 #         test_images = np.stack((test_images,)*3, axis = -1)
     
     return train_images, test_images, train_labels, test_labels 
+
+
+def get_mask_classes(class_type): 
+    mask_paths = [f'../FaceMaskDataset/{class_type}/WithMask/{i}' for i in os.listdir(f'../FaceMaskDataset/{class_type}/WithMask')]
+    mask_labels = [1 for i in range(len(mask_paths))]
+    
+    nomask_paths = [f'../FaceMaskDataset/{class_type}/WithoutMask/{i}' for i in os.listdir(f'../FaceMaskDataset/{class_type}/WithoutMask')]
+    nomask_labels = [0 for i in range(len(nomask_paths))]
+    
+    labels = np.array(mask_labels + nomask_labels)
+    print(f'{class_type.upper()} Value Counts')
+    print(pd.Series(labels).value_counts())
+    print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+    paths = np.array(mask_paths + nomask_paths)
+    labels = to_categorical(labels)
+    paths, labels = sk_shuffle(paths, labels)
+    return paths, labels
+def get_mask_splits(dim, pick_name= None, model_type = 'Mobilenet', bw = False): 
+    
+    #Train Set
+    train_paths, train_labels = get_mask_classes('Train')
+    train_images = np.array([get_image_value(i, dim, bw, model_type) for i in train_paths])
+    train_dict = dict(images = train_images, labels = train_labels)
+
+    #Test Set
+    test_paths, test_labels = get_mask_classes('Test')
+    test_images = np.array([get_image_value(i, dim, bw, model_type) for i in test_paths])
+    test_images, test_labels = sk_shuffle(test_images, test_labels)
+    
+    #Validation Set
+    val_paths, val_labels = get_mask_classes('Validation')
+    val_images = np.array([get_image_value(i, dim, bw, model_type) for i in val_paths])
+    val_images, val_labels = sk_shuffle(val_images, val_labels)
+    
+    tts = train_images, test_images, train_labels, test_labels, val_images, val_labels
+    
+    if pick_name:
+        print('Pickling The Data')
+        pickle.dump(tts, open(f'../Pickles/TTSMask_{pick_name}.p', 'wb'), protocol = 4)
+        print('Finished Pickling')
+    return tts
