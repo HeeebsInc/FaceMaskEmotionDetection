@@ -82,7 +82,7 @@
     1. Use [Haar feature based cascade classifier](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_objdetect/py_face_detection/py_face_detection.html) to locate the coordinates of a face within a frame
     2. Extract the ROI of the face using the coordinates given by the classifier
     3. Make two copies of the ROI, one for the mask model and another for the emotion model
-   44. Resize each copy to the correspoding dimensions used within the models 
+    4. Resize each copy to the correspoding dimensions used within the models 
     5. Start by making a mask prediction
         - If the model detects there is a mask, it will stop predicting and show a green box
         - If the model does not detect the mask, the algorithm will move onto the emotion model
