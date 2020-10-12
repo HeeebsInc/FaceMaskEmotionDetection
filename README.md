@@ -2,6 +2,9 @@
 
 **AI powered system for detecting whether a person is wearing a mask and if not, their facial expression** 
 
+
+![DemoStack](Images/DemoStack.png)
+
 ## Contributers
 - Samuel Mohebban (B.A. Psychology - George Washington University)
     - Samuel.MohebbanJob@gmail.com
@@ -87,5 +90,7 @@
         - If the model detects there is a mask, it will stop predicting and show a green box
         - If the model does not detect the mask, the algorithm will move onto the emotion model
     - Below you can see a .gif of how it works on my local machine
+    
+![Demo](Images/Demo.gif)
 
 ## Future Directions
