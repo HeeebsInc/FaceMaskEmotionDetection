@@ -64,7 +64,7 @@ def get_emotion_classes(class_type, max_values):
     paths, labels = sk_shuffle(paths, labels)
     return paths, labels
 
-#0: angry  1: disgust  2: fear  3: happy  4: neutral  5: sad  6: surprise
+#0: angry  1: happy  2: neutral  3: sad  4: disgust  5: fear  6: surprise
 def get_emotion_splits(dim, model_type = 'mobilenet', bw = False, max_values = 6000): 
     
     #Train

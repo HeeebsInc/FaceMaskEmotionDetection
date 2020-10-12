@@ -40,11 +40,14 @@ def plot_loss_accuracy(model_history, theme, path = None):
     
 
     
-def plot_roc_auc(model, x_test, y_test, theme, path = None):
+def plot_roc_auc(model, x_test, y_test, theme, model_type, path = None):
     '''This function will create ROC curve given the model, x_test, y_test, and theme for the plot. '''
     plt.style.use(theme)
     plt.figure(figsize = (8,5))
-    y_test = label_binarize(y_test, classes = [0,1])
+    if model_type.upper() == 'mask':
+        y_test = label_binarize(y_test, classes = [0,1])
+    elif model_type.upper() == 'EMOTION':
+        y_test = label_binarize(y_test, classes = [0,1,2])
     n_classes = y_test.shape[1]
     
     #AUC CURVE
@@ -59,26 +62,19 @@ def plot_roc_auc(model, x_test, y_test, theme, path = None):
     for i in range(n_classes): 
         fpr[i], tpr[i], _ = roc_curve(y_test[:,i], y_test_prob[:,i])
         roc_auc[i] = auc(fpr[i], tpr[i])
-        
-        
-        
+               
     all_fpr = np.unique(np.concatenate([fpr[i] for i in range(n_classes)]))
     # Then interpolate all ROC curves at this points
     mean_tpr = np.zeros_like(all_fpr)
     for i in range(n_classes):
         mean_tpr += np.interp(all_fpr, fpr[i], tpr[i])
-
-    
-    
+   
     # Finally average it and compute AUC
     mean_tpr /= n_classes
 
     fpr["macro"] = all_fpr
     tpr["macro"] = mean_tpr
     roc_auc["macro"] = auc(fpr["macro"], tpr["macro"])
-
-    
-    
     
     lw = 2
     # Plot all ROC curves
@@ -104,17 +100,17 @@ def plot_roc_auc(model, x_test, y_test, theme, path = None):
     plt.tight_layout()
     
     f1 = f1_score(y_test_actual, y_test_pred, average = None)
-    statement = f'F1 Scores Test\n~~~~~~~~~~~~~~~~~~~~~~\nNo Weapon: {f1[0]}\nHandGun: {f1[1]}\nRifle: {f1[2]}'
+    if model_type.upper() == 'MASK':
+        statement = f'F1 Scores Test\n~~~~~~~~~~~~~~~~~~~~~~\nNo Mask(0): {f1[0]}\nMask(1): {f1[1]}'
+    elif model_type.upper() == 'EMOTION':
+        statement = f'F1 Scores Test\n~~~~~~~~~~~~~~~~~~~~~~\nAngry(0): {f1[0]}\nHappy(1): {f1[1]}\nNeutral(2): {f1[2]}'
     print(statement)
     
     if path: 
         plt.savefig(path)
     plt.show()
     
-    
-    
-    
-    
+      
 def plot_model_cm(test_cm, train_cm, classes,
                           theme, cmap=plt.cm.Blues, path = None, normalize=False):
     """
