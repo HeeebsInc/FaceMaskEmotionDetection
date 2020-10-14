@@ -11,6 +11,8 @@
     - [LinkedIn](https://www.linkedin.com/in/samuel-mohebban-b50732139/)
     - [Medium](https://medium.com/@HeeebsInc)
 
+- I outline how to do this in my [Blog](https://towardsdatascience.com/custom-object-detection-using-keras-and-opencv-ddfe89bb3c3?source=friends_link&sk=a4b802501d1cf4423bead44b94e7657a)
+
 ## Business Problem
 - In the age of COVID-19, mask protection has been a vital instrument for stopping spread of the virus.  However, there has been much debate over whether people should be forced to wear one.  
 - Many businesses require that all customers wear a face mask, and have been found to enforce these rules by not allowing people to enter if they are found not wearing a face covering.
