@@ -31,7 +31,16 @@
 ## Data
 - Two datasets were used to train two neural networks
 1. Face Mask: ~12K Images Dataset ([Kaggle](https://www.kaggle.com/ashishjangra27/face-mask-12k-images-dataset?select=Face+Mask+Dataset))
+
+<p align="center" width="100%">
+    <img width="45%" src="Images/MaskDistribution.png"> 
+</p>
+
 2. Emotion: ~30K Images Dataset ([Kaggle](https://www.kaggle.com/msambare/fer2013))
+
+<p align="center" width="100%">
+    <img width="45%" src="Images/EmotionDistribution.png"> 
+</p>
 
 ## Modeling
 - For each model, early stopping was applied to prevent the model from overfitting
