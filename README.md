@@ -90,7 +90,12 @@
     5. Start by making a mask prediction
         - If the model detects there is a mask, it will stop predicting and show a green box
         - If the model does not detect the mask, the algorithm will move onto the emotion model
-    - Below you can see a .gif of how it works on my local machine
+
+<p align="center" width="100%">
+    <img width="75%" src="Images/CodeStructure.png"> 
+</p>
+      
+- Below you can see a .gif of how it works on my local machine
     
 ![Demo](Images/Demo.gif)
 
