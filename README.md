@@ -74,7 +74,7 @@
 </p>
 
 <p align="center" width="100%">
-    <img width="75%" src="Images/Mobilenet_CM.png"> 
+    <img width="75%" src="Images/mask_cm_new.png"> 
 </p>
 
 **2. Emotion Detection: Convolutional Neural Network** 
@@ -89,7 +89,7 @@
 </p>
 
 <p align="center" width="100%">
-    <img width="75%" src="Images/Normal_CM.png"> 
+    <img width="75%" src="Images/emotion_cm_new.png"> 
 </p>
 
 ## Deployment
