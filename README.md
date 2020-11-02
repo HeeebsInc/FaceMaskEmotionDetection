@@ -44,8 +44,15 @@
 
 ## Pre-processing 
 **1. Face Mask Detection: Mobilenet**
+
 <p align="center" width="100%">
     <img width="75%" src="Images/mobilenet_preprocessing.png"> 
+</p>
+
+**1. Face Mask Detection: Mobilenet**
+
+<p align="center" width="100%">
+    <img width="75%" src="Images/mask_preprocessing.png"> 
 </p>
 
 ## Modeling
