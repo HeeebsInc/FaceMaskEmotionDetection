@@ -12,6 +12,7 @@
     - [Medium](https://medium.com/@HeeebsInc)
 
 - I outline how to do this in my [Blog](https://towardsdatascience.com/custom-object-detection-using-keras-and-opencv-ddfe89bb3c3?source=friends_link&sk=a4b802501d1cf4423bead44b94e7657a)
+- [Google Slides Presentation](https://docs.google.com/presentation/d/1UP7sWPHTyoCfTIdKkmyQanTrWRbqaz4EprCPUKoQVek/edit?usp=sharing)
 
 ## Business Problem
 - In the age of COVID-19, mask protection has been a vital instrument for stopping spread of the virus.  However, there has been much debate over whether people should be forced to wear one.  
@@ -43,13 +44,13 @@
 </p>
 
 ## Pre-processing 
-**1. Face Mask Detection: Mobilenet**
+**1. Face Mask Dataset**
 
 <p align="center" width="100%">
     <img width="75%" src="Images/mobilenet_preprocessing.png"> 
 </p>
 
-**1. Face Mask Detection: Mobilenet**
+**2. Emotion Dataset**
 
 <p align="center" width="100%">
     <img width="75%" src="Images/emotion_preprocessing.png"> 
