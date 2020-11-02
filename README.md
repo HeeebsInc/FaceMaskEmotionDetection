@@ -42,6 +42,12 @@
     <img width="80%" src="Images/EmotionDistribution.png"> 
 </p>
 
+## Pre-processing 
+**1. Face Mask Detection: Mobilenet**
+<p align="center" width="100%">
+    <img width="75%" src="Images/mobilenet_preprocessing.png"> 
+</p>
+
 ## Modeling
 - For each model, early stopping was applied to prevent the model from overfitting
 - The data for the models can be retrieved using the functions within the [Functions.py](PyFunctions/Functions.py) file
