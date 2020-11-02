@@ -52,7 +52,7 @@
 **1. Face Mask Detection: Mobilenet**
 
 <p align="center" width="100%">
-    <img width="75%" src="Images/mask_preprocessing.png"> 
+    <img width="75%" src="Images/emotion_preprocessing.png"> 
 </p>
 
 ## Modeling
